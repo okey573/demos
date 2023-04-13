@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>首页</title>
+</head>
+<body>
+<h1>首页</h1>
+<div>
+  <ui>
+    <li>
+      <button id="getTokenBtn">getToken</button>
+    </li>
+    <li>
+      <button id="getData">getData</button>
+    </li>
+  </ui>
+</div>
+</body>
+
+<script>
+  document.getElementById('getTokenBtn').addEventListener('click', () => {
+    fetch('http://server.okey.com/server/getToken', {
+      mode: 'cors',
+      credentials: 'include'
+    }).then((resp) => {
+      resp.json().then(console.log)
+    })
+  })
+
+  document.getElementById('getData').addEventListener('click', () => {
+    fetch('http://server.okey.com/server/getData', {
+      mode: 'cors',
+      credentials: 'include'
+    }).then((resp) => {
+      resp.json().then(console.log)
+    })
+  })
+</script>
+</html>

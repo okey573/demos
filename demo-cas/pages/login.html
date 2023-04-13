@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页</title>
+</head>
+<body>
+<h1>登录页</h1>
+
+<form action="http://server.okey.com/server/userLogin" method="get">
+    用户名： <input type="text" name="username" /><br>
+    密 &nbsp;&nbsp;&nbsp;码： <input type="password" name="password" /><br>
+    <input type="submit" value="登录" />
+</form>
+
+<button id="testBtn">test btn</button>
+</body>
+
+<script>
+  document.getElementById('testBtn').addEventListener('click', () => {
+
+    fetch('http://server.okey.com/server/userLogin', {
+      mode: 'cors',
+      credentials: 'include'
+    })
+  })
+</script>
+</html>
