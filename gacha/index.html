@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>抽卡</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0f0f0f;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      width: 120px;
+      height: 160px;
+      border-radius: 6px;
+      background-color: #5e5cfc;
+      filter: hue-rotate(calc(var(--i) * 36deg));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(0, 0, 0, 0);
+      font-size: 4em;
+      font-weight: 700;
+      border: 10px solid rgb(0, 0, 0, .1);
+      position: absolute;
+      transition: .5s;
+      transform-origin: 50% 100%;
+      box-shadow: 0 15px 50px rgb(0, 0, 0, .1);
+      cursor: pointer;
+    }
+
+    .container:hover .card {
+      transform: rotate(calc(var(--i) * 5deg)) translate(calc(var(--i) * 60px), -20px);
+      box-shadow: 0 15px 50px rgb(0, 0, 0, .25);
+      color: rgba(0, 0, 0, .5);
+    }
+
+    .container:hover .card[active] {
+      translate: calc(var(--i) * 20px) -20px;
+      z-index: 9;
+    }
+
+
+    .container:has(.card[active]) .card:not([active]) {
+      background: #333;
+    }
+
+    /*.card:active {*/
+    /*  translate: calc(var(--i) * 20px) -20px;*/
+    /*  z-index: 9;*/
+    /*}*/
+
+    /*.container:active .card:not(:active) {*/
+    /*  background: #333;*/
+    /*}*/
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card" style="--i: -4">1</div>
+  <div class="card" style="--i: -3">2</div>
+  <div class="card" style="--i: -2">3</div>
+  <div class="card" style="--i: -1">4</div>
+  <div class="card" style="--i: 0">5</div>
+  <div class="card" style="--i: 1">6</div>
+  <div class="card" style="--i: 2">7</div>
+  <div class="card" style="--i: 3">8</div>
+  <div class="card" style="--i: 4">9</div>
+</div>
+</body>
+
+<script>
+  const container = document.querySelector('.container')
+  const cards = document.querySelectorAll('.card')
+  container.addEventListener('click', function (e) {
+    cards.forEach(card => {
+      if (card.hasAttribute('active') && card !== e.target) {
+        card.removeAttribute('active')
+      }
+    })
+    if (e.target.hasAttribute('active')) {
+      e.target.removeAttribute('active')
+    } else {
+      e.target.setAttribute('active', true)
+    }
+  })
+  container.addEventListener('mouseleave', function () {
+    cards.forEach(card => card.removeAttribute('active'))
+  })
+</script>
+</html>
